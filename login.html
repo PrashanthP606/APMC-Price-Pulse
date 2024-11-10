@@ -18,7 +18,69 @@
       </nav>
     </header>
 
-    <main class="login-container">
+    <main class="login-container"><!DOCTYPE html>
+      <html lang="en">
+      <head>
+          <meta charset="UTF-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <title>Login Page</title>
+          <link rel="stylesheet" href="login.css">
+      </head>
+      <body>
+          <div class="container">
+              <div class="login-card">
+                  <div class="login-header">
+                      <h1>Welcome back</h1>
+                      <p>Please enter your details to sign in</p>
+                  </div>
+      
+                  <form class="login-form">
+                      <div class="form-group">
+                          <label for="email">Email</label>
+                          <div class="input-group">
+                              <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                                  <polyline points="22,6 12,13 2,6"/>
+                              </svg>
+                              <input type="email" id="email" placeholder="Enter your email" required>
+                          </div>
+                      </div>
+      
+                      <div class="form-group">
+                          <label for="password">Password</label>
+                          <div class="input-group">
+                              <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                  <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                                  <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                              </svg>
+                              <input type="password" id="password" placeholder="Enter your password" required>
+                          </div>
+                      </div>
+      
+                      <div class="form-options">
+                          <label class="remember-me">
+                              <input type="checkbox" id="remember">
+                              <span>Remember me</span>
+                          </label>
+                          <a href="#" class="forgot-password">Forgot password?</a>
+                      </div>
+      
+                      <button type="submit" class="login-button">
+                          Sign in
+                          <svg class="arrow-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                              <line x1="5" y1="12" x2="19" y2="12"/>
+                              <polyline points="12 5 19 12 12 19"/>
+                          </svg>
+                      </button>
+                  </form>
+      
+                  <div class="signup-link">
+                      <p>Don't have an account? <a href="#">Sign up</a></p>
+                  </div>
+              </div>
+          </div>
+      </body>
+      </html>
       <h1>Login</h1>
       <p>Coming soon...</p>
     </main>
