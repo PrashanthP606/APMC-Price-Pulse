@@ -21,12 +21,15 @@ body {
 }
 
 .login-card {
-    background: white;
+    background: transparent;
     padding: 2rem;
     border-radius: 1rem;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
     width: 100%;
+    border: 2px solid rgba(225, 225, 255, 0.2);
+    backdrop-filter: blur(20px);
     max-width: 400px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
 .login-header {
