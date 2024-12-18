@@ -1,95 +1,145 @@
 /* General Styles */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Arial, sans-serif;
-  }
-  
-  body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background: linear-gradient(120deg, #ffff, #8fd3f4);
-  }
-  
-  .container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    max-width: 400px;
-    padding: 20px;
-  }
-  
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(120deg, #ffffff, #8fd3f4);
+  padding: 10px;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 400px;
+  padding: 20px;
+}
+
+.signup-box {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  padding: 30px;
+  text-align: center;
+}
+
+.signup-box h1 {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.input-group {
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+.input-group label {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 5px;
+  color: #555;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.input-group input:focus {
+  border-color: #28209e;
+  outline: none;
+}
+
+.btn {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  background: #2219a9;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.btn:hover {
+  background: #1d16ff;
+}
+
+.signup-box p {
+  margin-top: 15px;
+  font-size: 14px;
+  color: #555;
+}
+
+.signup-box a {
+  color: #1d16ff;
+  text-decoration: none;
+}
+
+.signup-box a:hover {
+  text-decoration: underline;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
   .signup-box {
-    background: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    padding: 30px;
-    text-align: center;
+    padding: 20px; /* Adjust padding for smaller screens */
   }
-  
+
   .signup-box h1 {
-    margin-bottom: 20px;
-    color: #333;
+    font-size: 1.5rem; /* Adjust heading size */
   }
-  
-  .input-group {
-    margin-bottom: 15px;
-    text-align: left;
-  }
-  
+
   .input-group label {
-    display: block;
-    font-size: 14px;
-    margin-bottom: 5px;
-    color: #555;
+    font-size: 12px; /* Adjust label font size */
   }
-  
+
   .input-group input {
-    width: 100%;
-    padding: 10px;
-    font-size: 14px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    padding: 8px; /* Reduce input padding */
+    font-size: 13px; /* Adjust input font size */
   }
-  
-  .input-group input:focus {
-    border-color: #28209e;
-    outline: none;
-  }
-  
+
   .btn {
-    width: 100%;
-    padding: 10px;
-    font-size: 16px;
-    background: #2219a9;
-    border: none;
-    border-radius: 5px;
-    color: white;
-    cursor: pointer;
-    transition: background 0.3s ease;
+    font-size: 14px; /* Scale button text size */
+    padding: 8px; /* Adjust button padding */
   }
-  
-  .btn:hover {
-    background: #2219a9;
-  }
-  
+
   .signup-box p {
-    margin-top: 15px;
-    font-size: 14px;
-    color: #555;
+    font-size: 13px; /* Adjust paragraph font size */
   }
-  
-  .signup-box a {
-    color: #1d16ff;
-    text-decoration: none;
+}
+
+@media (max-width: 480px) {
+  .signup-box {
+    padding: 15px; /* Further reduce padding */
   }
-  
-  .signup-box a:hover {
-    text-decoration: underline;
+
+  .signup-box h1 {
+    font-size: 1.25rem; /* Reduce heading size for small screens */
   }
-  
+
+  .input-group label,
+  .input-group input,
+  .btn,
+  .signup-box p {
+    font-size: 12px; /* Smaller font sizes for very narrow screens */
+  }
+
+  .btn {
+    padding: 6px; /* Make button more compact */
+  }
+}
