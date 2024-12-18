@@ -1,0 +1,16 @@
+<<<<<<< HEAD
+{
+  "dependencies": {
+    "firebase": "^11.1.0"
+  }
+}
+=======
+{
+  "scripts": {
+    "start": "servor --reload"
+  },
+  "dependencies": {
+    "servor": "^4.0.2"
+  }
+}
+>>>>>>> 9411f63e5e811e63ea8f83e1e3b816a29e63d841
