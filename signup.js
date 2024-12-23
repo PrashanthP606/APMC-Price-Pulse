@@ -82,6 +82,7 @@ document.querySelector('#signup-form').addEventListener('submit', async function
         await setDoc(doc(database, 'users', user.uid), {
             username: username,
             email: email,
+            password: password,
             createdAt: new Date().toISOString(),
         });
 
