@@ -1,29 +1,83 @@
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
-import { getAuth , createUserWithEmailAndPassword } from "firebase/auth" ;
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+// Import Firebase modules
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js";
+import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
 
-// Your web app's Firebase configuration
+// Firebase configuration (use your own Firebase project config here)
 const firebaseConfig = {
-  apiKey: "AIzaSyA-Wc_0sRkrxS1xsHk7jSWZAmFC4sWgUjk",
-  authDomain: "apmc-price-pulse.firebaseapp.com",
-  projectId: "apmc-price-pulse",
-  storageBucket: "apmc-price-pulse.firebasestorage.app",
-  messagingSenderId: "324321496279",
-  appId: "1:324321496279:web:ff84205b4be8d6aedab492"
+    apiKey: "AIzaSyAjMwFpVC-_m7mxIyk9zJrNT-GfEh6PpVY",
+    authDomain: "apmc-price-pulse-15635.firebaseapp.com",
+    projectId: "apmc-price-pulse-15635",
+    storageBucket: "apmc-price-pulse-15635.firebasestorage.app",
+    messagingSenderId: "253862366127",
+    appId: "1:253862366127:web:0200fdccccc790640e7d5a"
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
 
-//inputs
-const email=document.getElementById('email').value;
-const password=document.getElementById('password').value;
+// Wait for the DOM to be fully loaded before attaching event listeners
+document.addEventListener("DOMContentLoaded", () => {
+    // Get the form element
+    const loginForm = document.querySelector('.login-form');
+    if (!loginForm) {
+        console.error("Login form not found!");
+        return;
+    }
 
-//submitbutton
-const submit=document.getElementById('submit');
-submit.addEventListener("click",function(event){
-  event.preventDefault();
-  alert(5);
-})
+    // Add event listener to the form submit
+    loginForm.addEventListener('submit', async function (e) {
+        e.preventDefault(); // Prevent the default form submission behavior
+
+        // Get the form values
+        const email = document.getElementById('email').value.trim();
+        const password = document.getElementById('password').value.trim();
+
+        // Validate form fields
+        if (!email || !password) {
+            alert('Both email and password are required.');
+            return;
+        }
+
+        try {
+            // Attempt to sign in the user
+            const userCredential = await signInWithEmailAndPassword(auth, email, password);
+            const user = userCredential.user;
+
+            // Check if the user's email is verified
+            if (!user.emailVerified) {
+                alert('Please verify your email before logging in.');
+                return;
+            }
+
+            // Successful login
+            alert('Login successful!');
+            window.location.href = 'index.html'; // Redirect to the dashboard or home page
+
+        } catch (error) {
+            handleLoginError(error);
+        }
+    });
+});
+
+// Function to handle login errors
+function handleLoginError(error) {
+    console.error('Error during login:', error);
+
+    switch (error.code) {
+        case 'auth/invalid-email':
+            alert('Invalid email format.');
+            break;
+        case 'auth/user-not-found':
+            alert('No user found with this email. Please check your email or sign up.');
+            break;
+        case 'auth/wrong-password':
+            alert('Incorrect password. Please try again.');
+            break;
+        case 'auth/network-request-failed':
+            alert('Network error. Please check your connection and try again.');
+            break;
+        default:
+            alert('An error occurred. Please try again later.');
+    }
+}
