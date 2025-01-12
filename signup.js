@@ -1,10 +1,10 @@
 // Import Firebase modules
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.20.0/firebase-app.js";
 import { 
     getAuth, 
     createUserWithEmailAndPassword, 
     sendEmailVerification 
-} from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
+} from "https://www.gstatic.com/firebasejs/9.20.0/firebase-auth.js";
 import { 
     getFirestore, 
     setDoc, 
@@ -13,22 +13,37 @@ import {
     query, 
     where, 
     getDocs 
-} from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
+} from "https://www.gstatic.com/firebasejs/9.20.0/firebase-firestore.js";
 
 // Firebase configuration
 const firebaseConfig = {
     apiKey: "AIzaSyAjMwFpVC-_m7mxIyk9zJrNT-GfEh6PpVY",
     authDomain: "apmc-price-pulse-15635.firebaseapp.com",
     projectId: "apmc-price-pulse-15635",
-    storageBucket: "apmc-price-pulse-15635.firebasestorage.app",
+    storageBucket: "apmc-price-pulse-15635.appspot.com", // Corrected
     messagingSenderId: "253862366127",
     appId: "1:253862366127:web:0200fdccccc790640e7d5a"
-  };
+};
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const database = getFirestore(app);
+
+// Retry logic for network issues
+async function retryOperation(operation, retries = 3) {
+    for (let i = 0; i < retries; i++) {
+        try {
+            return await operation();
+        } catch (error) {
+            if (error.code === 'auth/network-request-failed' && i < retries - 1) {
+                console.warn('Network error, retrying...');
+                continue;
+            }
+            throw error;
+        }
+    }
+}
 
 // Handle form submission
 document.querySelector('#signup-form').addEventListener('submit', async function (e) {
@@ -57,8 +72,10 @@ document.querySelector('#signup-form').addEventListener('submit', async function
         const usernameQuery = query(usersRef, where('username', '==', username));
         const emailQuery = query(usersRef, where('email', '==', email));
 
-        const usernameSnapshot = await getDocs(usernameQuery);
-        const emailSnapshot = await getDocs(emailQuery);
+        const [usernameSnapshot, emailSnapshot] = await Promise.all([
+            getDocs(usernameQuery),
+            getDocs(emailQuery),
+        ]);
 
         if (!usernameSnapshot.empty) {
             alert('Username already exists. Please choose a different one.');
@@ -71,7 +88,9 @@ document.querySelector('#signup-form').addEventListener('submit', async function
         }
 
         // Create a new user using Firebase Authentication
-        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        const userCredential = await retryOperation(() =>
+            createUserWithEmailAndPassword(auth, email, password)
+        );
         const user = userCredential.user;
 
         // Send email verification
@@ -95,7 +114,8 @@ document.querySelector('#signup-form').addEventListener('submit', async function
 
 // Function to handle Firebase errors
 function handleFirebaseError(error) {
-    console.error('Error during registration:', error);
+    console.error('Firebase Error Code:', error.code);
+    console.error('Firebase Error Message:', error.message);
 
     switch (error.code) {
         case 'auth/email-already-in-use':
@@ -108,6 +128,10 @@ function handleFirebaseError(error) {
             alert('Network error. Please check your connection and try again.');
             break;
         default:
-            alert('An error occurred. Please try again later.');
+            alert('An unexpected error occurred. Please try again later.');
     }
 }
+
+// Enable Firebase debug logging
+import { setLogLevel } from "https://www.gstatic.com/firebasejs/9.20.0/firebase-app.js";
+setLogLevel('debug');

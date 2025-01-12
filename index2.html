@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>APMC Price-Pulse</title>
+  <link rel="stylesheet" href="index2.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <script defer src="index2.js"></script>
+ 
+</head>
+<body>
+  <header class="header">
+    <nav class="nav">
+      <a href="/" class="logo">
+        <img src="images/logo.png" alt="APMC Logo" class="logo-image">
+        <h2>APMC Price-Pulse</h2>
+      </a>
+      <div class="nav-links">
+        <a href="#productSelector">Markets</a>
+        <a href="#contact">Contact</a>
+        <a href="index.html">Logout</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section id="productSelector" class="selector">
+      <h1><big>Karnataka APMC Markets</big></h1>
+      <div id="dropdown" class="dropdown hidden"></div><br>
+        <label for="market"><strong style="font-size: larger;"><big>Select APMC :</big></strong></label>
+        <select name="" id="market">
+          <option value="Bagalkot">Bagalkot</option>
+          <option value="Davangere">Davangere</option>
+          <option value="Rabakavi">Rabakavi-Banahatti</option>
+          <option value="Mahalingpur">Mahalingpur</option>
+          <option value="Jamkhandi">Jamkhandi</option>
+        </select>
+      </div><br><br><br>
+      <h2>Select Crops/commodities:</h2>
+      <div id="selectcrops">
+        <button value="Tomato">Tomato - ಟೊಮೆಟೊ </button>
+        <button value="Chilli">Chilli - ಮೆಣಸಿನಕಾಯಿ </button> <br>
+        <button value="Potato">Potato - ಆಲೂಗಡ್ಡೆ </button>
+        <button value="Brinjal">Brinjal - ಬದನೆಕಾಯಿ </button><br>
+        <button value="Onion">Onion - ಈರುಳ್ಳಿ </button>
+        <button value="Carrot">Carrot - ಕ್ಯಾರೆಟ್ </button><br>
+        <button value="Rice">Rice - ಅಕ್ಕಿ </button>
+        <button value="Wheat">Wheat - ಗೋಧಿ </button>
+        <button value="Jowar">Jowar - ಜೋಳ </button>
+        <button value="Raagi">Raagi - ರಾಗಿ </button>
+        <button value="Sajje">Sajji - ಸಜ್ಜಿ </button>
+      </div>
+    </section>
+
+    <section id="priceChart" class="chart hidden">
+      <h2>Price Trends</h2>
+      <div id="chartCanvas"></div>
+    </section>
+  </main>
+
+  <footer class="footer" id="contact">
+    <p>&copy; 2024 APMC Price-Pulse. All rights reserved.</p>
+    <p>contact:  apmcprice@gmail.com</p>
+  </footer>
+</body>
+</html>

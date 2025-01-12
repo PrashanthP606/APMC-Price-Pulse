@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             // Successful login
             alert('Login successful!');
-            window.location.href = 'index.html'; // Redirect to the dashboard or home page
+            window.location.href = 'index2.html'; // Redirect to the dashboard or home page
 
         } catch (error) {
             handleLoginError(error);
