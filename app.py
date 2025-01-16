@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify
 import pandas as pd
+from datetime import datetime, timedelta
 from statsmodels.tsa.arima.model import ARIMA
 import matplotlib
 matplotlib.use('Agg')  # Use non-interactive backend
@@ -36,11 +37,16 @@ def forecast_price():
             return jsonify({"error": "Not enough data points to fit the ARIMA model."}), 400
 
         # Fit ARIMA model
-        model = ARIMA(data, order=(7, 1, 1))
+        model = ARIMA(data, order=(2, 1, 1))
         results = model.fit()
 
         # Forecast the next value
         forecast = results.forecast(steps=1)[0]
+        
+        end_date = datetime.now() 
+        start_date = end_date - timedelta(days=6) 
+        # Generate date labels for the xticks 
+        date_labels = [(start_date + timedelta(days=i)).strftime('%d-%m-%Y') for i in range(8)]
 
         # Plot and save the graph
         plt.figure(figsize=(10, 6))
@@ -49,6 +55,7 @@ def forecast_price():
         plt.title(f'Forecast for {crop_name} at {location}')
         plt.xlabel('Day')
         plt.ylabel('Price(per kg)')
+        plt.xticks(ticks=range(8), labels=date_labels)
         plt.legend()
         save_path = os.path.join("graphsimgs", "forecast_graph.png")
         if not os.path.exists("graphsimgs"):
@@ -58,7 +65,7 @@ def forecast_price():
 
         # Return results
         return jsonify({
-            "forecasted_price": round(forecast, 2),
+            "forecasted_price": round(forecast),
             "graph_path": save_path
         })
     except Exception as e:
